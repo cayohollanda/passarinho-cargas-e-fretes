@@ -14,12 +14,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
 @Entity(name = "TB_CONTATO")
 @NoArgsConstructor
+@EqualsAndHashCode
+@Data
 public class Contato implements Serializable{
 
 	/**
@@ -41,5 +39,6 @@ public class Contato implements Serializable{
 	
 	@Column
 	private String telefone;
+
 	
 }

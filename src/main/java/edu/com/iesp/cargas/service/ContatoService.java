@@ -18,8 +18,8 @@ public class ContatoService {
 	
 	// CRUD
 	@Transactional
-	public void salvarContato (Contato contato) {
-		this.contatoRepository.save(contato);
+	public Contato salvarContato (Contato contato) {
+		return this.contatoRepository.save(contato);
 	}
 	
 	@Transactional(readOnly=true)

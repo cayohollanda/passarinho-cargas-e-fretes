@@ -16,7 +16,7 @@ import edu.com.iesp.cargas.model.Cliente;
 import edu.com.iesp.cargas.service.ClienteService;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired

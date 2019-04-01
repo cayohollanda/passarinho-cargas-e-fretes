@@ -7,14 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity(name = "TB_CONTATO")
+@Entity
 @NoArgsConstructor
 @EqualsAndHashCode
 @Data
@@ -27,7 +26,7 @@ public class Contato implements Serializable{
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long Id;
 	
@@ -39,6 +38,9 @@ public class Contato implements Serializable{
 	
 	@Column
 	private String telefone;
+	
+	@ManyToOne
+	private EntidadeExterna entidadeExterna;
 
 	
 }

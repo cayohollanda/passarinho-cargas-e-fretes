@@ -46,12 +46,11 @@ public class ContatoController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletaContato(@PathVariable Long id) {
-		contatoService.removeContatoPorId(id);
-		return ResponseEntity.noContent().build();
+		return contatoService.removeContatoPorId(id);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Contato> alteraContato(Contato contato) {
+	public ResponseEntity<Contato> alteraContato(@RequestBody Contato contato) {
 		contatoService.atualizarContato(contato);
 		return ResponseEntity.noContent().build();
 	}

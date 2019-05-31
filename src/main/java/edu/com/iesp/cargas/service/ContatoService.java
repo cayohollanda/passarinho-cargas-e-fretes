@@ -1,8 +1,10 @@
 package edu.com.iesp.cargas.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +30,14 @@ public class ContatoService {
 	}
 	
 	@Transactional
-	public void removeContatoPorId(Long id) {
-		this.contatoRepository.deleteById(id);
+	public ResponseEntity<Void> removeContatoPorId(Long id) {
+		Contato contato = buscaContato(id);
+		if(contato!=null) {
+			this.contatoRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	public Contato buscaContatoPorId(Long id) {
@@ -38,6 +46,22 @@ public class ContatoService {
 	
 	@Transactional
 	public void atualizarContato(Contato contato) {
-		this.contatoRepository.saveAndFlush(contato);
+		Optional<Contato> c = contatoRepository.findById(contato.getId());
+		if(c.isPresent()) {
+			this.contatoRepository.saveAndFlush(contato);
+		}
+		else {
+			return;
+		}
+	}
+	
+	public Contato buscaContato(long id) {
+		Optional<Contato> c = contatoRepository.findById(id);
+		if(c.isPresent()) {
+			return c.get();
+		}
+		else {
+			return null;
+		}
 	}
 }

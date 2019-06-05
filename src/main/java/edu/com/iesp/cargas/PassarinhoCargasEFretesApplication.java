@@ -13,7 +13,6 @@ public class PassarinhoCargasEFretesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PassarinhoCargasEFretesApplication.class, args);
 		
-		
 	}
 
 }

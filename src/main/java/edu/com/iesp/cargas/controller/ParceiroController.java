@@ -17,26 +17,32 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.com.iesp.cargas.model.Parceiro;
 import edu.com.iesp.cargas.service.ParceiroService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/parceiros")
+@Api(value = "Parceiro", description = "API para gerenciamento de parceiros.")
 public class ParceiroController {
 	
 	@Autowired
 	ParceiroService parceiroService;
 	
+	@ApiOperation(value = "Realiza listagem de todos os parceiros cadastrados na base.")
 	@GetMapping
 	public ResponseEntity<List<Parceiro>> listarParceiroes(){
 		List<Parceiro> parceiros = parceiroService.listarParceiroes();
 		return ResponseEntity.ok().body(parceiros);
 	}
 	
+	@ApiOperation(value = "Realiza a busca de um parceiro a partir de seu identificador.")
 	@GetMapping("/{id}")
 	public ResponseEntity<Parceiro> buscarParceiro(@PathVariable Long id){
 		Parceiro parceiro = parceiroService.buscarParceiro(id);
 		return ResponseEntity.ok().body(parceiro);
 	}
 	
+	@ApiOperation(value = "Realiza o cadastro de um novo parceiro.")
 	@PostMapping
 	public ResponseEntity<Parceiro> salvarParceiro(@RequestBody Parceiro Parceiro){
 		Parceiro parceiroSalvo = parceiroService.salvarParceiro(Parceiro);
@@ -46,12 +52,14 @@ public class ParceiroController {
 		return ResponseEntity.created(uri).body(parceiroSalvo);
 	}
 	
+	@ApiOperation(value = "Realiza a atualização dos dados de um parceiro.")
 	@PutMapping
 	public ResponseEntity<Parceiro> atualizarParceiro(@RequestBody Parceiro parceiro){
 		Parceiro parceiroAtualizar = parceiroService.atualizarParceiro(parceiro);
 		return ResponseEntity.ok().body(parceiroAtualizar);
 	}
 	
+	@ApiOperation(value = "Remove um parceiro através de seu identificador.")
 	@DeleteMapping
 	public ResponseEntity<Void> removerParceiro(Long id){
 		parceiroService.removerParceiro(id);
